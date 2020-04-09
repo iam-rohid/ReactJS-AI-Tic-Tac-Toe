@@ -16,7 +16,6 @@ class TicTacToeAi extends Component {
   }
 
   winner(pos) {
-    console.log(pos)
     var newMsg
     if (this.state.cells[pos[0]][pos[1]] === 'x') {
       newMsg = "Ai won!"
@@ -31,7 +30,6 @@ class TicTacToeAi extends Component {
 
   checkWinner(pos) {
     var cells = this.state.cells
-    console.log(pos)
     // if Row match
     if (cells[0][0] === cells[0][1] && cells[0][1] === cells[0][2] && cells[0][2] !== '') {
 
@@ -78,7 +76,7 @@ class TicTacToeAi extends Component {
           }
         }
       }
-      if (freeCells === 0) {
+      if (freeCells <= 1) {
         this.setState({
           gameEnd: true,
           msg: "It's a tie!"
@@ -96,7 +94,6 @@ class TicTacToeAi extends Component {
       if (this.state.player === 1) {
         if (newCells[pos[0]][pos[1]] === '') {
           newCells[pos[0]][pos[1]] = 'o'
-          console.log(pos)
           this.setState({
             cells: newCells,
             player: 2
