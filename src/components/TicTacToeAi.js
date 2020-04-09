@@ -16,11 +16,12 @@ class TicTacToeAi extends Component {
   }
 
   winner(pos) {
+    console.log(pos)
     var newMsg
-    if (this.state.cells[pos[0]][pos[1]] === 'o') {
-      newMsg = "You won!"
-    } else if (this.state.cells[pos[0]][pos[1]] === 'x') {
+    if (this.state.cells[pos[0]][pos[1]] === 'x') {
       newMsg = "Ai won!"
+    } else {
+      newMsg = "You won!"
     }
     this.setState({
       gameEnd: true,
@@ -30,27 +31,44 @@ class TicTacToeAi extends Component {
 
   checkWinner(pos) {
     var cells = this.state.cells
+    console.log(pos)
     // if Row match
     if (cells[0][0] === cells[0][1] && cells[0][1] === cells[0][2] && cells[0][2] !== '') {
+
       this.winner(pos)
+      return true
     } else if (cells[1][0] === cells[1][1] && cells[1][1] === cells[1][2] && cells[1][2] !== '') {
+
       this.winner(pos)
+      return true
     } else if (cells[2][0] === cells[2][1] && cells[2][1] === cells[2][2] && cells[2][2] !== '') {
+
       this.winner(pos)
+      return true
     }
     // if coll match
     else if (cells[0][0] === cells[1][0] && cells[1][0] === cells[2][0] && cells[2][0] !== '') {
+
       this.winner(pos)
+      return true
     } else if (cells[0][1] === cells[1][1] && cells[1][1] === cells[2][1] && cells[2][1] !== '') {
+
       this.winner(pos)
+      return true
     } else if (cells[0][2] === cells[1][2] && cells[1][2] === cells[2][2] && cells[2][2] !== '') {
+
       this.winner(pos)
+      return true
     }
     // paragonal match
     else if (cells[0][0] === cells[1][1] && cells[1][1] === cells[2][2] && cells[2][2] !== '') {
+
       this.winner(pos)
-    } else if (cells[0][2] === cells[1][1] && cells[1][1] === cells[2][0] && cells[2][0] !== '') {
+      return true
+    } else if ((cells[0][2] === cells[1][1] && cells[1][1] === cells[2][0]) && cells[2][0] !== '') {
+
       this.winner(pos)
+      return true
     } else {
       var freeCells = 0
       for (let i = 0; i < this.state.cells.length; i++) {
@@ -66,23 +84,29 @@ class TicTacToeAi extends Component {
           msg: "It's a tie!"
         })
       }
+      return false
     }
+
   }
 
   handleClick(pos) {
-    if (!this.state.gameEnd && !this.state.gameEnd) {
+    var pos = pos
+    if (!this.state.gameEnd) {
       var newCells = this.state.cells
       if (this.state.player === 1) {
         if (newCells[pos[0]][pos[1]] === '') {
           newCells[pos[0]][pos[1]] = 'o'
+          console.log(pos)
           this.setState({
             cells: newCells,
             player: 2
-          }, () => { this.AiPlayer(pos) })
-
+          }, () => {
+            if (!this.checkWinner(pos)) {
+              this.AiPlayer(pos)
+            }
+          })
         }
       }
-      this.checkWinner(pos)
     }
   }
 
@@ -248,6 +272,24 @@ class TicTacToeAi extends Component {
     else if (((usedByPlayer.includes("12") && usedByPlayer.includes("22"))) && notUsedCells.includes("02")) {
       posToGo = "02"
     }
+    // angular
+    else if (((usedByPlayer.includes("00") && usedByPlayer.includes("11"))) && notUsedCells.includes("22")) {
+      posToGo = "22"
+    }
+    else if (((usedByPlayer.includes("02") && usedByPlayer.includes("11"))) && notUsedCells.includes("20")) {
+      posToGo = "20"
+    }
+
+    else if (((usedByPlayer.includes("20") && usedByPlayer.includes("11"))) && notUsedCells.includes("02")) {
+      posToGo = "02"
+    }
+    else if (((usedByPlayer.includes("22") && usedByPlayer.includes("11"))) && notUsedCells.includes("00")) {
+      posToGo = "00"
+    }
+
+    else if (((usedByPlayer.includes("00") && usedByPlayer.includes("22")) || (usedByPlayer.includes("02") && usedByPlayer.includes("20"))) && notUsedCells.includes("11")) {
+      posToGo = "11"
+    }
 
     // rows
     else if ((usedByPlayer.includes("00") && usedByPlayer.includes("02")) && notUsedCells.includes("01")) {
@@ -326,10 +368,8 @@ class TicTacToeAi extends Component {
         }
       }
     } else {
-      console.log(notUsedCells)
       posToGo = notUsedCells[0]
     }
-    console.log(posToGo)
     return posToGo
   }
 
