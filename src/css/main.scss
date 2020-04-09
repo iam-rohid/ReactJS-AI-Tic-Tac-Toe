@@ -1,0 +1,118 @@
+*,::before,::after{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  background-color: #fff;
+}
+
+.wrapper{
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .btn{
+    margin-top: 40px;
+    box-shadow: 0px 10px 20px -5px rgba($color: #7c2bff, $alpha: 0.5);
+  }
+  h1{
+    margin-bottom: 40px;
+  }
+}
+
+.btn{
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border: none;
+  background-color: #7c2bff;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.ttt-wrapper{
+  position: relative;
+  width: 400px;  
+  height: 400px;
+  display: grid;
+  grid-auto-columns: auto;
+  grid-auto-rows: 1fr;
+
+  &::after, &::before{
+    content: '';
+    position: absolute;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    left: 50%;
+    top: 50%;
+    width: calc(100% / 3);
+    height: 100%;
+  }
+  &::after{
+    transform: translate(-50%, -50%);
+    z-index: -100;
+  }
+  &::before{
+    z-index: -100;
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .row-wrapper{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    
+    
+    li{
+      cursor: pointer;
+      list-style: none;
+      width: 60%;
+      height: 60%;
+      justify-self: center;
+      align-self: center;
+    }
+  }
+}
+.o{
+    border-radius: 50%;
+    border: 6px solid black;
+}
+.x{
+  position: relative;
+  &::after, &::before{
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 100%;
+    background-color: black;
+    left: 50%;
+    top: 50%;
+    border-radius: 50px;
+  }
+  &::after{
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  &::before{
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+
+@media only screen and (max-width: 400px){
+  .wrapper{
+    justify-content: flex-start;
+    margin-top: 40px;
+  }
+  .ttt-wrapper{
+    width: 260px;
+    height: 260px;
+  }
+}
