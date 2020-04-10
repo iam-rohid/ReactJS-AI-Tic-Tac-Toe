@@ -1,6 +1,6 @@
 <p align="center">
 
-  <h3 align="center">Tic Tac Toe AI</h3>
+  <h1 align="center">Tic Tac Toe AI</h1>
 
   <p align="center">
     An AI Tic Tac Toe Game where you can play with the AI
@@ -32,7 +32,7 @@
 
 <p align="center"><img src="./images/game-image-1.png" width="400px"><p>
 
-It's a Tic Toe Game but here you have to play with the AI insted of human ;-)
+It's a Tic Tac Toe Game but here you have to play with the AI instead of human ;-)
 And for that there's only 5% of chances that you can win this game 🙂. If you think you are on of the 5% of people then give it a try 😜.
 
 ### Built With
