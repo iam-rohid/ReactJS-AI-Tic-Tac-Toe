@@ -320,10 +320,14 @@ class TicTacToeAi extends Component {
         posToGo = "11"
       } else {
         if (playerPos === "11") {
-          if (notUsedCells.includes("12")) { posToGo = "12" }
+          if (notUsedCells.includes("22")) { posToGo = "22" }
+          else if (notUsedCells.includes("00")) { posToGo = "02" }
+          else if (notUsedCells.includes("02")) { posToGo = "00" }
+          else if (notUsedCells.includes("20")) { posToGo = "20" }
           else if (notUsedCells.includes("21")) { posToGo = "21" }
-          else if (notUsedCells.includes("10")) { posToGo = "10" }
+          else if (notUsedCells.includes("12")) { posToGo = "12" }
           else if (notUsedCells.includes("01")) { posToGo = "01" }
+          else if (notUsedCells.includes("10")) { posToGo = "10" }
           else {
             posToGo = notUsedCells[0]
           }
